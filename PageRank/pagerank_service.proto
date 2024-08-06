@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package documentprocessor;
+
+option go_package = "LDA_PageRank_Query/proto;proto";
+
+// 定义服务消息
+message DocumentRequest {
+  string directory = 1;             // 文件所在目录
+  string query = 2;                 // 用户的查询词
+  repeated int32 clicks = 3;        // 点击次数数组
+}
+
+message DocumentResponse {
+  string documentName = 1;    // 文档名称
+  double pageRankScore = 2;   // 计算得到的PageRank得分
+}
+
+message DocumentList {
+  repeated DocumentResponse documents = 1;  // 文档列表
+}
+
+// 定义服务接口
+service DocumentProcessor {
+  rpc ProcessDocuments (DocumentRequest) returns (DocumentList);
+}
