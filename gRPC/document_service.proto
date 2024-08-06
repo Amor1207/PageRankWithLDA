@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package documentprocessor;
+
+// 定义服务消息
+message DocumentRequest {
+  string directory = 1;
+  repeated int32 clicks = 2; // 添加点击次数数组
+}
+
+message DocumentResponse {
+  string documentName = 1;
+  double pageRankScore = 2;
+}
+
+message DocumentList {
+  repeated DocumentResponse documents = 1;
+}
+
+// 定义服务接口
+service DocumentProcessor {
+  rpc ProcessDocuments (DocumentRequest) returns (DocumentList);
+}
+
